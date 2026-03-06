@@ -30,6 +30,7 @@
     background: var(--bg);
     color: var(--text);
     min-height: 100vh;
+    overflow-x: hidden;
   }
 
   /* ── HEADER ── */
@@ -41,89 +42,93 @@
     top: 0;
     z-index: 100;
     box-shadow: 0 2px 16px rgba(183,18,52,0.25);
-    border-radius: 18px 18px 0 0;
-    overflow: hidden;
   }
   .header-inner {
     max-width: 1300px;
     margin: 0 auto;
-    padding: 18px 32px;
+    padding: 14px 16px;
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 12px;
   }
   .ucm-logo {
-    width: 48px; height: 48px;
+    width: 40px; height: 40px;
     background: rgba(255,255,255,0.15);
-    border-radius: 10px;
+    border-radius: 8px;
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
     border: 1px solid rgba(255,255,255,0.25);
   }
-  .header-titles { flex: 1; }
+  .header-titles { flex: 1; min-width: 0; }
   .header-titles h1 {
     font-family: 'Playfair Display', serif;
-    font-size: 1.35rem; font-weight: 700;
+    font-size: 1.1rem; font-weight: 700;
     letter-spacing: 0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
-  .header-titles p { font-size: 0.82rem; opacity: 0.75; margin-top: 2px; }
+  .header-titles p { font-size: 0.75rem; opacity: 0.75; margin-top: 2px; display: none; }
   .header-badge {
     background: rgba(255,255,255,0.15);
     border: 1px solid rgba(255,255,255,0.3);
     color: white;
-    padding: 5px 14px;
+    padding: 4px 10px;
     border-radius: 20px;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: 0.05em;
     white-space: nowrap;
+    flex-shrink: 0;
   }
 
   /* ── TABS ── */
-  .tabs-bar {
-    background: white;
-    border-bottom: 2px solid var(--border);
-    display: flex;
-    max-width: 1300px;
-    margin: 0 auto;
-    padding: 0 32px;
-    gap: 0;
-  }
   .tabs-wrapper {
     background: white;
     border-bottom: 2px solid var(--border);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .tabs-wrapper::-webkit-scrollbar { display: none; }
+  .tabs-bar {
+    display: flex;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 16px;
+    gap: 0;
+    min-width: max-content;
   }
   .tab-btn {
-    padding: 14px 28px;
+    padding: 11px 16px;
     border: none; background: none; cursor: pointer;
     font-family: 'Source Sans 3', sans-serif;
-    font-size: 0.9rem; font-weight: 600;
+    font-size: 0.82rem; font-weight: 600;
     color: #555;
     border-bottom: 3px solid transparent;
     margin-bottom: -2px;
     transition: all 0.2s;
+    white-space: nowrap;
   }
   .tab-btn:hover { color: var(--ucm-blue); }
   .tab-btn.active { color: var(--ucm-blue); border-bottom-color: var(--ucm-blue); }
 
   /* ── MAIN ── */
-  .main { max-width: 1300px; margin: 0 auto; padding: 32px; }
+  .main { max-width: 1300px; margin: 0 auto; padding: 16px; }
   .tab-panel { display: none; }
   .tab-panel.active { display: block; }
 
   /* ── KPI CARDS ── */
   .kpi-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 12px;
-    margin-bottom: 28px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
   }
-  @media (max-width: 900px) { .kpi-grid { grid-template-columns: repeat(3, 1fr); } }
-  @media (max-width: 560px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
   .kpi-card {
     background: var(--surface);
     border-radius: 10px;
-    padding: 14px 16px;
+    padding: 12px 14px;
     border: 1px solid var(--border);
     box-shadow: 0 1px 4px rgba(0,0,0,0.04);
     position: relative;
@@ -138,58 +143,57 @@
   .kpi-card.gold::before { background: var(--ucm-gold); }
   .kpi-card.female::before { background: var(--female); }
   .kpi-card.male::before { background: var(--male); }
-  .kpi-label { font-size: 0.7rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 5px; }
-  .kpi-value { font-family: 'Playfair Display', serif; font-size: 1.65rem; font-weight: 700; color: var(--text); line-height: 1; }
-  .kpi-sub { font-size: 0.72rem; color: var(--muted); margin-top: 5px; }
+  .kpi-label { font-size: 0.65rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+  .kpi-value { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1; }
+  .kpi-sub { font-size: 0.68rem; color: var(--muted); margin-top: 4px; }
 
   /* ── SECTION TITLES ── */
   .section-title {
     font-family: 'Playfair Display', serif;
-    font-size: 1.2rem; font-weight: 700;
+    font-size: 1.05rem; font-weight: 700;
     color: var(--ucm-blue);
-    margin-bottom: 16px;
-    padding-bottom: 10px;
+    margin-bottom: 14px;
+    padding-bottom: 8px;
     border-bottom: 2px solid var(--border);
-    display: flex; align-items: center; gap: 10px;
+    display: flex; align-items: center; gap: 8px;
   }
   .section-title span.dot {
-    width: 10px; height: 10px; border-radius: 50%;
-    background: var(--ucm-gold); display: inline-block;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--ucm-gold); display: inline-block; flex-shrink: 0;
   }
 
   /* ── CHARTS ── */
-  .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 28px; }
+  .charts-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 20px; }
   .charts-grid.full { grid-template-columns: 1fr; }
-  @media (max-width: 860px) { .charts-grid { grid-template-columns: 1fr; } }
 
   .chart-card {
     background: var(--surface);
     border-radius: 12px;
-    padding: 24px;
+    padding: 16px;
     border: 1px solid var(--border);
     box-shadow: 0 1px 6px rgba(0,0,0,0.04);
   }
   .chart-title {
-    font-size: 0.88rem; font-weight: 700; color: var(--ucm-blue);
-    text-transform: uppercase; letter-spacing: 0.05em;
-    margin-bottom: 18px;
+    font-size: 0.8rem; font-weight: 700; color: var(--ucm-blue);
+    text-transform: uppercase; letter-spacing: 0.04em;
+    margin-bottom: 14px;
   }
-  .chart-wrap { position: relative; height: 280px; }
-  .chart-wrap.tall { height: 380px; }
-  .chart-wrap.xtall { height: 520px; }
+  .chart-wrap { position: relative; height: 240px; }
+  .chart-wrap.tall { height: 320px; }
+  .chart-wrap.xtall { height: 420px; }
 
   /* ── FILTER BAR ── */
   .filter-bar {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 16px 20px;
-    margin-bottom: 24px;
-    display: flex; flex-wrap: wrap; gap: 16px; align-items: center;
+    padding: 12px 14px;
+    margin-bottom: 16px;
+    display: flex; flex-direction: column; gap: 10px;
   }
-  .filter-label { font-size: 0.82rem; font-weight: 600; color: var(--muted); white-space: nowrap; }
+  .filter-label { font-size: 0.8rem; font-weight: 600; color: var(--muted); }
   .filter-select {
-    padding: 7px 12px;
+    padding: 8px 10px;
     border: 1px solid var(--border);
     border-radius: 8px;
     font-family: 'Source Sans 3', sans-serif;
@@ -198,70 +202,103 @@
     background: white;
     cursor: pointer;
     outline: none;
-    min-width: 200px;
+    width: 100%;
   }
-  .filter-select:focus { border-color: var(--ucm-blue); box-shadow: 0 0 0 2px rgba(0,63,125,0.15); }
+  .filter-select:focus { border-color: var(--ucm-blue); box-shadow: 0 0 0 2px rgba(183,18,52,0.15); }
 
-  .legend-row { display: flex; gap: 18px; flex-wrap: wrap; margin-bottom: 6px; }
-  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; color: var(--muted); }
-  .legend-dot { width: 12px; height: 12px; border-radius: 3px; }
+  .legend-row { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 6px; }
+  .legend-item { display: flex; align-items: center; gap: 5px; font-size: 0.78rem; color: var(--muted); }
+  .legend-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
 
   /* ── TABLE ── */
-  .table-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid var(--border); }
-  table { width: 100%; border-collapse: collapse; font-size: 0.83rem; }
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 12px; border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
   thead th {
     background: var(--ucm-blue); color: white;
-    padding: 11px 14px; text-align: left;
-    font-weight: 600; font-size: 0.78rem; letter-spacing: 0.03em;
+    padding: 10px 12px; text-align: left;
+    font-weight: 600; font-size: 0.75rem; letter-spacing: 0.03em;
     white-space: nowrap;
   }
   thead th:first-child { border-radius: 12px 0 0 0; }
   thead th:last-child { border-radius: 0 12px 0 0; }
-  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
+  tbody tr { border-bottom: 1px solid var(--border); }
   tbody tr:last-child { border-bottom: none; }
   tbody tr:hover { background: #fdf5f6; }
-  tbody td { padding: 10px 14px; }
+  tbody td { padding: 9px 12px; white-space: nowrap; }
   tbody td:not(:first-child) { text-align: right; font-variant-numeric: tabular-nums; }
-  .category-cell { font-weight: 600; color: var(--text); max-width: 220px; }
+  .category-cell { font-weight: 600; color: var(--text); max-width: 160px; white-space: normal; }
   .num-pos { color: var(--ucm-blue); font-weight: 600; }
   .bar-cell { position: relative; }
   .inline-bar {
-    display: inline-block; height: 6px; border-radius: 3px;
-    background: var(--ucm-gold); vertical-align: middle; margin-right: 6px;
+    display: inline-block; height: 5px; border-radius: 3px;
+    background: var(--ucm-gold); vertical-align: middle; margin-right: 4px;
   }
-  tfoot td { background: #f5f2ee; font-weight: 700; padding: 11px 14px; }
+  tfoot td { background: #f5f2ee; font-weight: 700; padding: 10px 12px; white-space: nowrap; }
   tfoot td:not(:first-child) { text-align: right; }
 
   /* ── GENDER BARS ── */
-  .gender-bar-wrap { display: flex; height: 8px; border-radius: 4px; overflow: hidden; margin-top: 4px; }
+  .gender-bar-wrap { display: flex; height: 7px; border-radius: 4px; overflow: hidden; margin-top: 3px; }
   .gender-bar-f { background: #979492; }
   .gender-bar-m { background: #9b8942; }
 
   /* ── NOTE ── */
   .note {
-    font-size: 0.75rem; color: var(--muted);
+    font-size: 0.72rem; color: var(--muted);
     margin-top: 8px; padding: 8px 12px;
     background: #f7f9fe; border-left: 3px solid var(--ucm-gold);
     border-radius: 0 6px 6px 0;
   }
 
   /* ── EVOLUCIÓN ── */
-  .evo-controls { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; align-items: center; }
+  .evo-controls { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
   .evo-btn {
-    padding: 7px 16px; border-radius: 20px;
+    padding: 6px 14px; border-radius: 20px;
     border: 1.5px solid var(--border);
     background: white; cursor: pointer;
-    font-size: 0.82rem; font-weight: 600; color: var(--muted);
+    font-size: 0.8rem; font-weight: 600; color: var(--muted);
     transition: all 0.2s;
   }
   .evo-btn.active, .evo-btn:hover { background: var(--ucm-blue); color: white; border-color: var(--ucm-blue); }
 
   footer {
-    text-align: center; padding: 32px 28px;
-    font-size: 0.75rem; color: var(--muted);
+    text-align: center; padding: 24px 16px;
+    font-size: 0.72rem; color: var(--muted);
     border-top: 1px solid var(--border);
-    margin-top: 40px;
-    line-height: 1.7;
+    margin-top: 32px;
+    line-height: 1.8;
+  }
+
+  /* ── DESKTOP OVERRIDES ── */
+  @media (min-width: 640px) {
+    .header-inner { padding: 16px 24px; }
+    .header-titles h1 { font-size: 1.25rem; }
+    .header-titles p { display: block; }
+    .ucm-logo { width: 44px; height: 44px; }
+    .tabs-bar { padding: 0 24px; min-width: unset; }
+    .tab-btn { padding: 13px 22px; font-size: 0.87rem; }
+    .main { padding: 24px; }
+    .kpi-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+    .filter-bar { flex-direction: row; align-items: center; }
+    .filter-select { width: auto; min-width: 200px; }
+    .chart-wrap { height: 260px; }
+    .chart-wrap.tall { height: 350px; }
+    .chart-wrap.xtall { height: 480px; }
+  }
+
+  @media (min-width: 900px) {
+    .header-inner { padding: 18px 32px; }
+    .header-titles h1 { font-size: 1.35rem; }
+    .ucm-logo { width: 48px; height: 48px; }
+    .tabs-bar { padding: 0 32px; }
+    .tab-btn { padding: 14px 28px; }
+    .main { padding: 32px; }
+    .kpi-grid { grid-template-columns: repeat(5, 1fr); }
+    .charts-grid { grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 28px; }
+    .charts-grid.full { grid-template-columns: 1fr; }
+    .chart-card { padding: 24px; }
+    .chart-wrap { height: 280px; }
+    .chart-wrap.tall { height: 380px; }
+    .chart-wrap.xtall { height: 520px; }
   }
 </style>
 </head>
